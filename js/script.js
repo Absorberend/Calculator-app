@@ -35,7 +35,7 @@ const themeSwitcher = (value) => {
 
 //Load the theme we selected on a previous visit
 window.onload = () => {
-    themeSwitcher(themeMode);
+    themeSwitcher(localStorage.getItem('theme'));
     console.log(localStorage.getItem('theme'));
     console.log(typeof localStorage.getItem('theme'));
     //Set the range input value to the localStorage theme value
