@@ -28,7 +28,7 @@ const themeSwitcher = (value) => {
 
 //Load the theme we selected on a previous visit
 window.onload = () => {
-    if (localStorage.getItem('theme') !== 'undefined' || 'null' || null ) {
+    if (localStorage.getItem('theme') !== 'undefined' || 'null' || null || undefined ) {
     themeSwitcher(themeMode);
     
     //Set the range input value to the localStorage theme value

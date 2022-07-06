@@ -9,6 +9,7 @@ html {
 
 body {
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -98,16 +99,29 @@ main {
     min-width: 370px;
     min-height: 600px;
     padding: 0.5em;
-    grid-template-rows: 0.1fr 0.7fr 3.4fr;
+    grid-template-rows: 0.1fr 0.7fr 3.4fr 50px;
     grid-template-areas:
     "header"
     "screen"
-    "keys";
+    "keys"
+    "footer";
     gap: 0.6em;
     -webkit-user-select: none;  
     -moz-user-select: none;     
     -ms-user-select: none;     
     user-select: none;   
+}
+
+/* footer */
+footer {
+    grid-area: footer;
+    font-size: 10px;
+    justify-self: center;
+    color: var(--key-background-toggle);
+}
+
+footer a {
+    color: var(--key-background-toggle);
 }
 
 /* header styling */
@@ -379,24 +393,19 @@ header h1 {
     transform: translateY(2px);
 }
 
+
 @media (hover: hover) {
     .key__press:hover {
         filter: brightness(135%);
     }
   }
 
-/* footer */
-.hidden {
-    display: none;
-}
-
-
 @media only screen and (min-width: 650px) {
     main {
         display: grid;
         min-width: 650px;
         min-height: 700px;
-        grid-template-rows: 0.1fr 0.9fr 3.4fr;
+        grid-template-rows: 0.1fr 0.9fr 3.4fr 40px;
         gap: 1em;
     }
     
