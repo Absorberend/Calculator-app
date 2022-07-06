@@ -13,6 +13,6 @@ https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29
 
 ![My solution](/design/my-solution.png "My solution")
 
-View my solution at: 
+View my solution at: https://shiny-queijadas-0656f6.netlify.app/
 
 Feedback is welcome! Especially about JavaScript 😁
