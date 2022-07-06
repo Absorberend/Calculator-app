@@ -27,7 +27,7 @@ const themeSwitcher = (value) => {
 }
 
 //Load the theme we selected on a previous visit
-    if (localStorage.getItem('theme') !== 'undefined' || 'null' || null || undefined ) {
+    if (localStorage.getItem('theme') || themeMode !== 'undefined' || 'null' || null || undefined ) {
     
     themeSwitcher(localStorage.getItem('theme'));
 
