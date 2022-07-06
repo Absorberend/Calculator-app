@@ -29,6 +29,7 @@ const themeSwitcher = (value) => {
         body[0].setAttribute("class", themesArray[0]);
         themeMode = localStorage.setItem('theme', 0);
         toggle.value = 1;
+        console.log(localStorage.getItem('theme'));
     }
 }
 
@@ -36,6 +37,7 @@ const themeSwitcher = (value) => {
 window.onload = () => {
     themeSwitcher(themeMode);
     console.log(localStorage.getItem('theme'));
+    console.log(typeof localStorage.getItem('theme'));
     //Set the range input value to the localStorage theme value
     toggle.value = Number.parseInt(localStorage.getItem('theme'));
 }
