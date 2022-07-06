@@ -1,0 +1,456 @@
+html {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--main-background);
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+}
+
+/* Theme styling classes */
+.blue__theme {
+    /* background colors */
+    --main-background: hsl(222, 26%, 31%);
+    --toggle-background: hsl(223, 31%, 20%);
+    --screen-background: hsl(224, 36%, 15%);
+
+    /* key colors */
+    --key-background-misc: hsl(225, 21%, 49%);
+    --key-shadow-misc: hsl(224, 28%, 35%);
+
+    --key-background-toggle: hsl(6, 63%, 50%);
+    --key-shadow-toggle: hsl(6, 70%, 34%);
+
+    --key-background: hsl(30, 25%, 89%);
+    --key-shadow: hsl(28, 16%, 65%); 
+
+    /* font color */
+    --font-color-primary: hsl(221, 14%, 31%);
+    --font-color-header: white;
+    --font-color-enter: white;
+    --font-color-secondary: white;
+    --font-color-screen: white;
+}
+
+.white__theme {
+    /* background colors */
+    --main-background: hsl(0, 0%, 90%);
+    --toggle-background: hsl(0, 5%, 81%);
+    --screen-background: hsl(0, 0%, 93%);
+
+    /* key colors */
+    --key-background-misc: hsl(185, 42%, 37%);
+    --key-shadow-misc: hsl(185, 58%, 25%);
+
+    --key-background-toggle: hsl(25, 98%, 40%);
+    --key-shadow-toggle: hsl(25, 99%, 27%);
+
+    --key-background: hsl(45, 7%, 89%);
+    --key-shadow: hsl(35, 11%, 61%); 
+
+    /* font color */
+    --font-color-primary: hsl(60, 10%, 19%);
+    --font-color-header: hsl(60, 10%, 19%);
+    --font-color-enter: white;
+    --font-color-secondary:  white;
+    --font-color-screen: hsl(60, 10%, 19%);
+}
+
+.purple__theme {
+    /* background colors */
+    --main-background: hsl(268, 75%, 9%);
+    --toggle-background: hsl(268, 71%, 12%);
+    --screen-background: hsl(268, 71%, 12%);
+
+    /* key colors */
+    --key-background-misc: hsl(281, 89%, 26%);
+    --key-shadow-misc: hsl(285, 91%, 52%);
+
+    --key-background-toggle: hsl(176, 100%, 44%);
+    --key-shadow-toggle: hsl(177, 92%, 70%);
+
+    --key-background: hsl(268, 47%, 21%);
+    --key-shadow: hsl(290, 70%, 36%); 
+
+    /* font color */
+    --font-color-primary: hsl(52, 100%, 62%);
+    --font-color-header: hsl(52, 100%, 62%);
+    --font-color-enter: hsl(198, 20%, 13%);
+    --font-color-secondary: white;
+    --font-color-screen: hsl(52, 100%, 62%);
+}
+
+/* main styling */
+main {
+    display: grid;
+    min-width: 370px;
+    min-height: 600px;
+    padding: 0.5em;
+    grid-template-rows: 0.1fr 0.7fr 3.4fr;
+    grid-template-areas:
+    "header"
+    "screen"
+    "keys";
+    gap: 0.6em;
+    -webkit-user-select: none;  
+    -moz-user-select: none;     
+    -ms-user-select: none;     
+    user-select: none;   
+}
+
+/* header styling */
+header {
+    grid-area: header;
+    display: grid;
+    height: 100%;
+    padding-block-end: 1em;
+    grid-template-columns: 1fr 0.4fr 0.5fr;
+    grid-template-areas: "logo ttext tcont";
+    align-items: flex-end;
+    font-size: 15px;
+    color: var(--font-color-header);
+    gap: 1.5em;
+}
+
+header h1 {
+    padding: 0;
+    margin: 0;
+}
+
+.logo {
+    grid-area: logo;
+    padding: 0;
+    margin: 0;
+    margin-block-end: -6px;
+    font-size: 1.2rem;
+}
+
+.theme__text {
+    grid-area: ttext;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 14px;
+    justify-self: flex-end;
+}
+
+.toggle__container {
+    grid-area: tcont;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.2em;
+
+}
+
+/* slider styling */
+.toggle__input {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    border-radius: 15px;
+    background-color: var(--toggle-background);
+    cursor: pointer;
+}
+
+.toggle__input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--key-background-toggle);
+}
+
+.toggle__input::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background-color: var(--key-background-toggle);
+}
+
+.toggle__input::-webkit-slider-thumb:active {
+    cursor: grabbing;
+}
+
+.toggle__input::-moz-range-thumb:active {
+    cursor: grabbing;
+}
+
+.toggle__text {
+    display: flex;
+    justify-content: space-around;
+    align-self: flex-end;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* screen styling */
+.screen__container {
+    grid-area: screen;
+    display: grid;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-end;
+    align-content: center;
+    padding: 0.8em;
+    padding-block-start: 1em;
+    background-color: var(--screen-background);
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    color: var(--font-color-screen);
+    -webkit-user-select: all; 
+    -moz-user-select: all;     
+    -ms-user-select: all;      
+    user-select: all;          
+}
+
+
+.screen__output {
+    max-width: 280px;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* key styling */
+.keys__container {
+    grid-area: keys;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "seven eight nine del"
+    "four five six add"
+    "one two three subtract"
+    "period zero divide multiply"
+    "reset reset enter enter";
+    background-color: var(--toggle-background);
+    border-radius: 10px;
+    gap: 0.45em;
+    padding: 0.8em;
+}
+
+.key__template {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--key-background);
+    box-shadow: 0px 3px var(--key-shadow);
+    color: var(--font-color-primary);
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-block-start: 5px;
+}
+
+.key__one {
+    grid-area: one;
+}
+
+.key__two {
+    grid-area: two;
+}
+
+.key_three {
+    grid-area: three;
+}
+
+.key__four {
+    grid-area: four;
+}
+
+.key__five {
+    grid-area: five;
+}
+
+.key__six {
+    grid-area: six;
+}
+
+.key__seven {
+    grid-area: seven;
+}
+
+.key__eight {
+    grid-area: eight;
+}
+
+.key__nine {
+    grid-area: nine;
+}
+
+.key__zero {
+    grid-area: zero;
+}
+
+.key__period {
+    grid-area: period;
+}
+
+.op__add {
+    grid-area: add;
+}
+
+.op__subtract {
+    grid-area: subtract;
+}
+
+
+.op__multiply {
+    grid-area: multiply;
+}
+
+.op__divide {
+    grid-area: divide;
+}
+
+.op__enter {
+    grid-area: enter;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--key-background-toggle);
+    box-shadow: 0px 3px var(--key-shadow-toggle);
+    color: var(--font-color-enter);
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-block-start: 5px;
+}
+
+.key__reset {
+    grid-area: reset;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--key-background-misc);
+    box-shadow: 0px 3px var(--key-shadow-misc);
+    color: var(--font-color-secondary);
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-block-start: 5px;
+}
+
+.key__del {
+    grid-area: del;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--key-background-misc);
+    box-shadow: 0px 3px var(--key-shadow-misc);
+    color: var(--font-color-secondary);
+    font-size: 18px;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    padding-block-start: 5px;
+}
+
+.key__press {
+    transition: all 75ms ease;
+}
+
+.key__press:active {
+    transform: translateY(2px);
+}
+
+@media (hover: hover) {
+    .key__press:hover {
+        filter: brightness(135%);
+    }
+  }
+
+/* footer */
+.hidden {
+    display: none;
+}
+
+
+@media only screen and (min-width: 650px) {
+    main {
+        display: grid;
+        min-width: 650px;
+        min-height: 700px;
+        grid-template-rows: 0.1fr 0.9fr 3.4fr;
+        gap: 1em;
+    }
+    
+    header {
+        grid-template-columns: 1.5fr 0.25fr 0.3fr;
+        gap: 1.8em;
+    }
+
+    .logo {
+        margin-block-end: -6px;
+        font-size: 1rem;
+    }
+    
+    .theme__text {
+        font-size: 0.8rem;
+        justify-self: flex-end;
+        margin-block-end: 5px;
+    }
+
+    .toggle__text {
+        font-size: 0.8rem;
+    }
+
+    .screen__container {
+        font-size: 4rem;
+        padding: 0.6em 0.7em;
+    }
+    
+    .screen__output {
+        max-width: 525px;
+        max-height: 60px;
+    }
+
+    .keys__container {
+        gap: 0.6em;
+        padding: 1em;
+        font-size: 2.8rem;
+    }
+    .key__template {
+        border-radius: 10px;
+    }
+
+    .op__enter {
+        font-size: 1.6rem;
+        border-radius: 10px;
+    }
+    
+    .key__reset {
+        font-size: 1.6rem;
+        border-radius: 10px;
+    }
+    
+    .key__del {
+        font-size: 1.6rem;
+        border-radius: 10px;
+    }
+}

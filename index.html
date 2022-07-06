@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/stylesheet.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Calculator app</title>
+
+  
+
+</head>
+<body class="blue__theme">
+  <main>
+    <header>
+      <div class="logo"><h1>calc</h1></div>
+      <div class="theme__text">theme</div>
+      <div class="toggle__container">
+        <label for="theme_toggle" class="toggle__text">
+          <span>1</span>
+          <span>2</span>
+          <span>3</span>
+        </label>
+        <input type="range" name="theme_toggle" min="1" max="3" step="1" value="1" class="toggle__input"></input>
+      </div>
+    </header>
+
+    <div class="screen__container">
+      <div class="screen__output"></div>
+    </div>
+
+    <div class="keys__container">
+        <div id="key__number" class="key__one key__template key__press">1</div>
+        <div id="key__number" class="key__two key__template key__press">2</div>
+        <div id="key__number" class="key__three key__template key__press">3</div>
+        <div id="key__number" class="key__four key__template key__press">4</div>
+        <div id="key__number" class="key__five key__template key__press">5</div>
+        <div id="key__number" class="key__six key__template key__press">6</div>
+        <div id="key__number" class="key__seven key__template key__press">7</div>
+        <div id="key__number" class="key__eight key__template key__press">8</div>
+        <div id="key__number" class="key__nine key__template key__press">9</div>
+        <div id="key__number" class="key__zero key__template key__press">0</div>
+        <div id="key__number" class="key__period key__template key__press">.</div>
+
+        <div id="key__operator" class="op__add key__template key__press">+</div>
+        <div id="key__operator" class="op__subtract key__template key__press">-</div>
+        <div id="key__operator" class="op__multiply key__template key__press">x</div>
+        <div id="key__operator" class="op__divide key__template key__press">/</div>
+        
+        <div id="key__equals" class="op__enter key__press">=</div>
+        <div id="key__reset" class="key__reset key__press">RESET</div>
+        <div id="key__delete" class="key__del key__press">DEL</div>
+    </div>
+  </main>
+  <footer> 
+    <div class="hidden">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
