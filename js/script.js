@@ -8,6 +8,7 @@ const delete_key = document.getElementById('key__delete');
 const reset = document.getElementById('key__reset');
 
 let themeMode = localStorage.getItem('theme');
+
 const themesArray = ["blue__theme", "white__theme", "purple__theme"];
 
 let numberInput;
@@ -22,21 +23,21 @@ screenOutput.innerHTML = '0';
 //Also save the theme we selected to the localStorage
 const themeSwitcher = (value) => {
         body[0].removeAttribute("class");
-        themeMode = localStorage.setItem('theme', value);
+        localStorage.setItem('theme', value);
         body[0].setAttribute("class", themesArray[Number.parseInt(value) - 1]);
 }
 
 //Load the theme we selected on a previous visit
-    if (localStorage.getItem('theme') || themeMode !== 'undefined' || 'null' || null || undefined ) {
-    
-    themeSwitcher(localStorage.getItem('theme'));
-
-    //Set the range input value to the localStorage theme value
-    toggle.value = Number.parseInt(localStorage.getItem('theme'));
+window.onload = () => {
+    if (themeMode === 'NaN' || themeMode === 'null' || themeMode === {NaN} || themeMode === null) {
+        //do nothing
     } else {
-
+        themeSwitcher(themeMode);
+        //Set the range input value to the localStorage theme value
+        toggle.value = Number.parseInt(localStorage.getItem('theme'));
     }
-
+}
+    
 
 //Call the themeSwitcher function to switch the theme when toggling the range input
 toggle.addEventListener("input", () => {

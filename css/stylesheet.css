@@ -117,7 +117,7 @@ footer {
     grid-area: footer;
     font-size: 10px;
     justify-self: center;
-    color: var(--key-background-toggle);
+    color: var(--key-background-misc);
 }
 
 footer a {
@@ -193,6 +193,8 @@ header h1 {
     width: 18px;
     height: 18px;
     border-radius: 50%;
+    border: none;
+    outline: none;
     background-color: var(--key-background-toggle);
 }
 
