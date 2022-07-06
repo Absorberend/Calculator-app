@@ -21,7 +21,7 @@ screenOutput.innerHTML = '0';
 //Switch themes by removing, and after that, adding a class to the HTML Body element
 //Also save the theme we selected to the localStorage
 const themeSwitcher = (value) => {
-    if (value !== 'undefined') {
+    if (value !== 'undefined' || 'null') {
         body[0].removeAttribute("class");
         themeMode = localStorage.setItem('theme', value);
         body[0].setAttribute("class", themesArray[Number.parseInt(value) - 1]);
