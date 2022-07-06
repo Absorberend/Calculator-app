@@ -21,14 +21,21 @@ screenOutput.innerHTML = '0';
 //Switch themes by removing, and after that, adding a class to the HTML Body element
 //Also save the theme we selected to the localStorage
 const themeSwitcher = (value) => {
+    if (value !== 'undefined') {
         body[0].removeAttribute("class");
         themeMode = localStorage.setItem('theme', value);
         body[0].setAttribute("class", themesArray[Number.parseInt(value) - 1]);
+    } else {
+        body[0].setAttribute("class", themesArray[0]);
+        themeMode = localStorage.setItem('theme', 0);
+        toggle.value = 1;
+    }
 }
 
 //Load the theme we selected on a previous visit
 window.onload = () => {
     themeSwitcher(themeMode);
+    console.log(localStorage.getItem('theme'));
     //Set the range input value to the localStorage theme value
     toggle.value = Number.parseInt(localStorage.getItem('theme'));
 }
