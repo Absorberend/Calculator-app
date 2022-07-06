@@ -21,25 +21,24 @@ screenOutput.innerHTML = '0';
 //Switch themes by removing, and after that, adding a class to the HTML Body element
 //Also save the theme we selected to the localStorage
 const themeSwitcher = (value) => {
-    if (value !== 'undefined' || 'null' || null ) {
         body[0].removeAttribute("class");
         themeMode = localStorage.setItem('theme', value);
         body[0].setAttribute("class", themesArray[Number.parseInt(value) - 1]);
-    } else {
-        body[0].setAttribute("class", themesArray[0]);
-        themeMode = localStorage.setItem('theme', 0);
-        toggle.value = 1;
-        console.log(localStorage.getItem('theme'));
-    }
 }
 
 //Load the theme we selected on a previous visit
 window.onload = () => {
-    themeSwitcher(localStorage.getItem('theme'));
-    console.log(localStorage.getItem('theme'));
-    console.log(typeof localStorage.getItem('theme'));
+    if (localStorage.getItem('theme') !== 'undefined' || 'null' || null ) {
+    themeSwitcher(themeMode);
+    
     //Set the range input value to the localStorage theme value
     toggle.value = Number.parseInt(localStorage.getItem('theme'));
+    } else {
+        //do nothing
+    }
+    console.log(localStorage.getItem('theme'));
+    console.log(typeof localStorage.getItem('theme'));
+
 }
 
 //Call the themeSwitcher function to switch the theme when toggling the range input
