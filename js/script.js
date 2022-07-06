@@ -27,19 +27,16 @@ const themeSwitcher = (value) => {
 }
 
 //Load the theme we selected on a previous visit
-window.onload = () => {
     if (localStorage.getItem('theme') !== 'undefined' || 'null' || null || undefined ) {
-    themeSwitcher(themeMode);
     
+    themeSwitcher(localStorage.getItem('theme'));
+
     //Set the range input value to the localStorage theme value
     toggle.value = Number.parseInt(localStorage.getItem('theme'));
     } else {
-        //do nothing
-    }
-    console.log(localStorage.getItem('theme'));
-    console.log(typeof localStorage.getItem('theme'));
 
-}
+    }
+
 
 //Call the themeSwitcher function to switch the theme when toggling the range input
 toggle.addEventListener("input", () => {
