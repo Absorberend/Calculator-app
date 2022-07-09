@@ -12,9 +12,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <title>Frontend Mentor | Calculator app</title>
-
-  
-
 </head>
 <body class="blue__theme">
   <main>
@@ -27,31 +24,32 @@
           <span>2</span>
           <span>3</span>
         </label>
-        <input type="range" name="theme_toggle" min="1" max="3" step="1" value="1" class="toggle__input"></input>
+        <input type="range" name="theme_toggle" id="theme_toggle" min="1" max="3" step="1" value="1" class="toggle__input">
       </div>
     </header>
 
     <div class="screen__container">
       <div class="screen__output"></div>
+      <div class="screen__previous__output"></div>
     </div>
 
     <div class="keys__container">
-        <div id="key__number" class="key__one key__template key__press">1</div>
-        <div id="key__number" class="key__two key__template key__press">2</div>
-        <div id="key__number" class="key__three key__template key__press">3</div>
-        <div id="key__number" class="key__four key__template key__press">4</div>
-        <div id="key__number" class="key__five key__template key__press">5</div>
-        <div id="key__number" class="key__six key__template key__press">6</div>
-        <div id="key__number" class="key__seven key__template key__press">7</div>
-        <div id="key__number" class="key__eight key__template key__press">8</div>
-        <div id="key__number" class="key__nine key__template key__press">9</div>
-        <div id="key__number" class="key__zero key__template key__press">0</div>
-        <div id="key__number" class="key__period key__template key__press">.</div>
+        <div class="key__one key__template key__press key__number">1</div>
+        <div class="key__two key__template key__press key__number">2</div>
+        <div class="key__three key__template key__press key__number">3</div>
+        <div class="key__four key__template key__press key__number">4</div>
+        <div class="key__five key__template key__press key__number">5</div>
+        <div class="key__six key__template key__press key__number">6</div>
+        <div class="key__seven key__template key__press key__number">7</div>
+        <div class="key__eight key__template key__press key__number">8</div>
+        <div class="key__nine key__template key__press key__number">9</div>
+        <div class="key__zero key__template key__press key__number">0</div>
+        <div class="key__period key__template key__press key__number">.</div>
 
-        <div id="key__operator" class="op__add key__template key__press">+</div>
-        <div id="key__operator" class="op__subtract key__template key__press">-</div>
-        <div id="key__operator" class="op__multiply key__template key__press">x</div>
-        <div id="key__operator" class="op__divide key__template key__press">/</div>
+        <div class="op__add key__template key__press key__operator">+</div>
+        <div class="op__subtract key__template key__press key__operator">-</div>
+        <div class="op__multiply key__template key__press key__operator">x</div>
+        <div class="op__divide key__template key__press key__operator">/</div>
         
         <div id="key__equals" class="op__enter key__press">=</div>
         <div id="key__reset" class="key__reset key__press">RESET</div>
