@@ -12,12 +12,13 @@ let themeMode = localStorage.getItem('theme');
 
 const themesArray = ["blue__theme", "white__theme", "purple__theme"];
 
-let numberInput;
-let operatorInput;
-let previousInput = '';
 let operatorCheck = false;
 let equalsCheck = false;
-let equalsValue = '';
+let numberInput;
+let operatorInput = '';
+let previousInput = '';
+let currentValue;
+let equalsValue;
 screenOutput.innerHTML = '0';
 
 //Switch themes by removing, and after that, adding a class to the HTML Body element
@@ -39,54 +40,10 @@ window.onload = () => {
     }
 }
     
-
 //Call the themeSwitcher function to switch the theme when toggling the range input
 toggle.addEventListener("input", () => {
     themeSwitcher(toggle.value);
 });
-
-outputCheck = value => {
-    //Clear the 0 from the screen depending on the input
-    if (screenOutput.innerHTML === '0') {
-        if (value === '0') {
-            //do nothing
-        } else if (value === '.') {
-            screenOutput.innerHTML += value;
-        } else {
-            screenOutput.innerHTML = value;
-        }
-    //No unlimited periods
-    } else if (value === '.') {
-        if (!screenOutput.innerHTML.includes('.')) {
-            screenOutput.innerHTML += value;
-
-        } else {
-            //do nothing
-        } 
-    //If we have pressed an operator we overrule the old screenvalue with the new value
-    } else if (previousInput !== '') {
-        if (operatorCheck === true) {
-            screenOutput.innerHTML = value;
-            operatorCheck = false;
-        } else if (operatorCheck === true && screenOutput.innerHTML === '0' ) {
-            screenOutput.innerHTML += value;
-            operatorCheck = false;
-        } else {
-            screenOutput.innerHTML += value;
-            operatorCheck = false;
-        }
-    } else {
-        screenOutput.innerHTML += value;
-    }
-}
-
-//Receive the number value when pressing a number key
-numbers.forEach(number => {
-    number.addEventListener("click", () => {
-        numberInput = number.innerHTML;
-        outputCheck(numberInput);
-    });
-})
 
 //Reset all the values to the default values
 reset.addEventListener("click", () => {
@@ -100,10 +57,12 @@ hardreset = () => {
     operatorCheck = false;
     equalsCheck = false;
     equalsValue = '';
+    currentValue = '';
     screenOutput.innerHTML = '0';
     previousScreenOutput.innerHTML = null;  
 }
 
+//Delete the numberInput, can't delete when screeninput is 0 or after an equals.
 delete_key.addEventListener("click", () => {
     if (screenOutput.innerHTML !== '0' && equalsCheck === false) {
     screenOutput.innerHTML = screenOutput.innerHTML.slice(0, -1);
@@ -112,91 +71,86 @@ delete_key.addEventListener("click", () => {
     } 
 });
 
+//Receive the number value when pressing a number key
+numbers.forEach(number => {
+    number.addEventListener("click", () => {
+        numberInput = number.innerHTML;
+        if (screenOutput.innerHTML.includes('.') > 0) {
+            if (numberInput === '.') {
+
+            } else {
+                screenOutput.innerHTML += numberInput;
+            }
+        } else if (screenOutput.innerHTML === `Can't divide by zero`) {
+
+        } else if (screenOutput.innerHTML === '0') {
+            screenOutput.innerHTML = numberInput;
+        } else {
+        screenOutput.innerHTML += numberInput;
+
+        }
+    });
+})
+
 //Receive the operator when pressing an operator key
 operators.forEach(operator => {
     operator.addEventListener("click", () => {
+        if (operatorCheck === false) {
             operatorInput = operator.innerHTML;
             previousInput = screenOutput.innerHTML;
             previousScreenOutput.innerHTML = `${previousInput} ${operatorInput}`;
             operatorCheck = true;
             equalsCheck = false;
+            screenOutput.innerHTML = null;
+        }        
     });
 })
 
-//Display the correct calculation history on screen
-historyString = () => {
-    if (screenOutput.innerHTML === '0' && !equalsCheck && operatorCheck === true) {
-        previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${screenOutput.innerHTML} =`;
-    } else if (operatorInput === '') {
-        previousScreenOutput.innerHTML = `${screenOutput.innerHTML} =`;   
-    } else if (!equalsCheck) {
-        previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${equalsValue} =`;  
-    } else if (screenOutput.innerHTML === 'Infinity') {
-        previousScreenOutput.innerHTML = null;  
-        screenOutput.innerHTML = `Cannot divide by zero`;
-    } else if (operatorInput === '+') {
-        previousScreenOutput.innerHTML = `${screenOutput.innerHTML - equalsValue} ${operatorInput} ${equalsValue} =`;
-    } else if (operatorInput === '-') {
-        previousScreenOutput.innerHTML = `${Number.parseInt(screenOutput.innerHTML) + equalsValue} ${operatorInput} ${equalsValue} =`;
-    } else if (operatorInput === 'x') {
-        previousScreenOutput.innerHTML = `${screenOutput.innerHTML / equalsValue} ${operatorInput} ${equalsValue} =`;
-    } else if (operatorInput === '/') {
-        previousScreenOutput.innerHTML = `${screenOutput.innerHTML * equalsValue} ${operatorInput} ${equalsValue} =`;
-    }
-};
-
-
+//Equals. Equals only works when we have an operator and a previousvalue. 
 equals.addEventListener('click', () => {
-    if (Number.parseFloat(screenOutput.innerHTML) === 0 && !equalsCheck && Number.parseFloat(previousInput) <= 0) {
-        screenOutput.innerHTML = '0';
-    } else if (operatorCheck = false) {
-        screenOutput.innerHTML = screenOutput.innerHTML;       
-        historyString();
-    } else if (screenOutput.innerHTML === `Cannot divide by zero`) {
-        hardreset();
-    } else {
-        if (operatorInput === '+') {
-            if (!equalsCheck) {
-                screenOutput.innerHTML = Number.parseFloat(previousInput) + Number.parseFloat(screenOutput.innerHTML);
-                equalsValue = Number.parseFloat(screenOutput.innerHTML) - Number.parseFloat(previousInput);
-                historyString();
-                equalsCheck = true;
-            } else {
-                screenOutput.innerHTML = Number.parseFloat(screenOutput.innerHTML) + Number.parseFloat(equalsValue);    
-                historyString();
-            }
-        } else if (operatorInput === 'x') {
-            if (!equalsCheck) {
-                screenOutput.innerHTML = Number.parseFloat(previousInput) * Number.parseFloat(screenOutput.innerHTML);
-                equalsValue = Number.parseFloat(screenOutput.innerHTML) / Number.parseFloat(previousInput);
-                historyString();
-                equalsCheck = true;
-            } else if (screenOutput.innerHTML === '0') {
-                //do nothing
-            } else {
-                screenOutput.innerHTML = Number.parseFloat(screenOutput.innerHTML) * Number.parseFloat(equalsValue);    
-                historyString();
-            }
-        } else if (operatorInput === '-') {
-            if (!equalsCheck) {
-                screenOutput.innerHTML = Number.parseFloat(previousInput) - Number.parseFloat(screenOutput.innerHTML);
-                equalsValue = Number.parseFloat(previousInput) - Number.parseFloat(screenOutput.innerHTML);
-                historyString();
-                equalsCheck = true;
-            } else {
-                screenOutput.innerHTML = Number.parseFloat(screenOutput.innerHTML) - Number.parseFloat(equalsValue);    
-                historyString();
-            }
-        } else if (operatorInput === '/') {
-            if (!equalsCheck) {
-                screenOutput.innerHTML = Number.parseFloat(previousInput) / Number.parseFloat(screenOutput.innerHTML);
-                equalsValue = Number.parseFloat(previousInput) / Number.parseFloat(screenOutput.innerHTML);
-                historyString();
-                equalsCheck = true;
-            } else {
-                screenOutput.innerHTML = Number.parseFloat(screenOutput.innerHTML) / Number.parseFloat(equalsValue);    
-                historyString();
-            }
+    if (!equalsCheck && operatorCheck) {
+        currentValue = screenOutput.innerHTML;
+
+        if (currentValue === '') {
+
+        } else {
+            screenOutput.innerHTML = null;
+
+            switch (operatorInput) {
+                case '+':
+                    equalsValue = Number.parseFloat(previousInput) + Number.parseFloat(currentValue);
+                    previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${currentValue} =`;
+                    screenOutput.innerHTML = equalsValue;
+                    operatorCheck = false;
+                    break;
+                case '-':
+                    equalsValue = Number.parseFloat(previousInput) - Number.parseFloat(currentValue);
+                    previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${currentValue} =`;
+                    screenOutput.innerHTML = equalsValue;
+                    operatorCheck = false;
+                    break;
+                case 'x':
+                    equalsValue = Number.parseFloat(previousInput) * Number.parseFloat(currentValue);
+                    previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${currentValue} =`;     
+                    screenOutput.innerHTML = equalsValue;
+                    operatorCheck = false;   
+                    break;
+                case '/':
+                    if (Number.parseFloat(currentValue) === 0 || currentValue === '.') {
+                        previousScreenOutput.innerHTML = '';
+                        screenOutput.innerHTML = `Can't divide by zero`; 
+                    } else {
+                        equalsValue = Number.parseFloat(previousInput) / Number.parseFloat(currentValue);
+                        previousScreenOutput.innerHTML = `${previousInput} ${operatorInput} ${currentValue} =`;
+                        screenOutput.innerHTML = equalsValue; 
+                        operatorCheck = false;
+                    }
+                    break;
+                }
+
+            equalsCheck = true;
         }
-    }
+    } else {
+
+    } 
 });
