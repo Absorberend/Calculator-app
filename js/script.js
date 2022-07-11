@@ -113,6 +113,9 @@ equals.addEventListener('click', () => {
 
         if (currentValue === '') {
 
+        } else if (previousInput === '.' || currentValue === '.') {
+        hardreset();
+            
         } else {
             screenOutput.innerHTML = null;
 
